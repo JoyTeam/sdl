@@ -1,0 +1,5 @@
+"""SDL module."""
+
+module(name = "sdl", version = "3.0.0")
+
+bazel_dep(name = "rules_cc", version = "0.0.8")

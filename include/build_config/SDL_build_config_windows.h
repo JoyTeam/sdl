@@ -305,4 +305,7 @@ typedef unsigned int uintptr_t;
 /* Enable filesystem support */
 #define SDL_FILESYSTEM_WINDOWS  1
 
+// Added by aml.
+#define HAVE_OPENGL 1
+
 #endif /* SDL_build_config_windows_h_ */

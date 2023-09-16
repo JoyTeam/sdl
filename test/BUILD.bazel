@@ -1,0 +1,42 @@
+cc_test(
+    name = "testbounds",
+    srcs = ["testbounds.c"],
+    deps = [
+        "//:sdl",
+        "//src/test:common",
+    ],
+)
+
+cc_test(
+    name = "testatomic",
+    srcs = ["testatomic.c"],
+    deps = [
+        "//:sdl",
+        "//src/test:common",
+    ],
+)
+
+cc_library(
+    name = "testutils",
+    srcs = [
+        "testutils.c",
+        "testutils.h",
+    ],
+    deps = [
+        "//:sdl",
+        "//src/test:common",
+    ],
+)
+
+cc_binary(
+    name = "testautomation",
+    srcs = glob([
+        "testautomation*.c",
+        "testautomation*.h",
+    ]),
+    deps = [
+        "//:sdl",
+        "//src/test:common",
+    ],
+)
+
