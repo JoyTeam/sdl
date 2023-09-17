@@ -1,47 +1,43 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
 alias(
-	name = "windows",
-	actual  = "@bazel_tools//src/conditions:windows"
+    name = "windows",
+    actual = "@bazel_tools//src/conditions:windows",
 )
 
 alias(
-	name = "macos",
-	actual  = "@bazel_tools//src/conditions:darwin_x86_64"
+    name = "macos",
+    actual = "@bazel_tools//src/conditions:darwin_x86_64",
 )
 
 alias(
-	name = "linux",
-	actual  = "@bazel_tools//src/conditions:linux_x86_64"
+    name = "linux",
+    actual = "@bazel_tools//src/conditions:linux_x86_64",
 )
 
 SDL_LINKOPTS = select({
-	"//:windows": [
-		"-DEFAULTLIB:user32",
-		"-DEFAULTLIB:gdi32",
-		"-DEFAULTLIB:winmm",
-		"-DEFAULTLIB:imm32",
-		"-DEFAULTLIB:ole32",
-		"-DEFAULTLIB:oleaut32",
-		"-DEFAULTLIB:version",
-		"-DEFAULTLIB:uuid",
-		"-DEFAULTLIB:shell32",
-		"-DEFAULTLIB:advapi32",
-		"-DEFAULTLIB:hid",
-		"-DEFAULTLIB:setupapi",
-		"-DEFAULTLIB:opengl32",
-		"-DEFAULTLIB:kernel32",
-	],
-	"//conditions:default": [],
+    "//:windows": [
+        "-DEFAULTLIB:user32",
+        "-DEFAULTLIB:gdi32",
+        "-DEFAULTLIB:winmm",
+        "-DEFAULTLIB:imm32",
+        "-DEFAULTLIB:ole32",
+        "-DEFAULTLIB:oleaut32",
+        "-DEFAULTLIB:version",
+        "-DEFAULTLIB:uuid",
+        "-DEFAULTLIB:shell32",
+        "-DEFAULTLIB:advapi32",
+        "-DEFAULTLIB:hid",
+        "-DEFAULTLIB:setupapi",
+        "-DEFAULTLIB:opengl32",
+        "-DEFAULTLIB:kernel32",
+    ],
+    "//conditions:default": [],
 })
 
 cc_library(
-	name = "sdl",
-	hdrs = glob([
-        "include/SDL3/*.h",
-    ]),
-	includes = ["include", "src"],
-	srcs = glob([
+    name = "sdl",
+    srcs = glob([
         "src/**/*.h",
         "src/*.c",
         "src/core/*.c",
@@ -91,8 +87,15 @@ cc_library(
             "src/thread/generic/SDL_syscond.c",
             "src/thread/generic/SDL_sysrwlock.c",
         ],
-     	"//conditions:default": [],
-   }),
-	linkopts = SDL_LINKOPTS,
-	visibility = ["//visibility:public"],
+        "//conditions:default": [],
+    }),
+    hdrs = glob([
+        "include/SDL3/*.h",
+    ]),
+    includes = [
+        "include",
+        "src",
+    ],
+    linkopts = SDL_LINKOPTS,
+    visibility = ["//visibility:public"],
 )
